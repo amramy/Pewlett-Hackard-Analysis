@@ -109,7 +109,7 @@ SELECT DISTINCT ON (emp_no) e.emp_no,
 	e.first_name,
 	e.last_name,
 	e.birth_date,
-	de.from_date,
+	de.from_date, 
 	de.to_date,
 	t.title
 INTO five_yr_mentorship_eligibilty
