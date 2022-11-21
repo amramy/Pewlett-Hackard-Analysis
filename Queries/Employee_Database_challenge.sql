@@ -135,9 +135,7 @@ ORDER BY count DESC;
 
 SELECT * FROM mentor_titles;
 
---length of employment
--- Avg length of employment
--- AVG lenght of employment per department
+
 
 -- FIND LENGTH OF EMPLOYMENT
 
