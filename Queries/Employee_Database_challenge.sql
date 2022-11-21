@@ -26,6 +26,7 @@ SELECT * FROM retirement_titles;
 --Query 
 --REMOVE duplicates from retirement_titles
 -- Use Dictinct with Orderby to remove duplicate rows
+-- filter current employees using WHERE to_date =
 SELECT DISTINCT ON (emp_no) emp_no,
 first_name,
 last_name,
@@ -49,7 +50,7 @@ FROM unique_titles;
 -- CREATE "Retiring Titles" table with # EE for each title
 -- NotiCE "AS count" created new column "count", title column as title
 SELECT COUNT(emp_no) AS count, title 
-INTO retiring_titles --(count, title)
+INTO retiring_titles 
 FROM unique_titles
 GROUP BY title
 ORDER BY count DESC;
@@ -84,6 +85,56 @@ SELECT * FROM mentorship_eligibilty;
 -- EXPORT mentorship_eligibilty to DAta file as csv.
 
 --DELIVERABLE #3: Two additional queries to provide more insight into the upcoming "silver tsunami."
+
+-- Lets widen the range of eligible EE Three Year range
+SELECT DISTINCT ON (emp_no) e.emp_no,
+	e.first_name,
+	e.last_name,
+	e.birth_date,
+	de.from_date,
+	de.to_date,
+	t.title
+--INTO mentorship_eligibilty
+FROM employees AS e
+INNER JOIN dept_emp AS de
+ON e.emp_no = de.emp_no
+INNER JOIN titles AS t
+ON e.emp_no = t.emp_no
+WHERE de.to_date = '9999-01-01'
+AND e.birth_date BETWEEN '1964-01-01' AND '1966-12-31'
+ORDER BY emp_no;
+
+-- Lets widen the range of eligible EE Five Year range
+SELECT DISTINCT ON (emp_no) e.emp_no,
+	e.first_name,
+	e.last_name,
+	e.birth_date,
+	de.from_date,
+	de.to_date,
+	t.title
+INTO five_yr_mentorship_eligibilty
+FROM employees AS e
+INNER JOIN dept_emp AS de
+ON e.emp_no = de.emp_no
+INNER JOIN titles AS t
+ON e.emp_no = t.emp_no
+WHERE de.to_date = '9999-01-01'
+AND e.birth_date BETWEEN '1963-01-01' AND '1967-12-31'
+ORDER BY emp_no;
+
+SELECT * FROM five_yr_mentorship_eligibilty;
+
+
+--mentor ready by department
+SELECT COUNT(emp_no) AS count, title 
+INTO mentor_titles 
+FROM mentorship_eligibilty
+GROUP BY title
+ORDER BY count DESC;
+
+
+SELECT * FROM mentor_titles;
+
 --length of employment
 -- Avg length of employment
 -- AVG lenght of employment per department
