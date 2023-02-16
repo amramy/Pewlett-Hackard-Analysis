@@ -58,4 +58,13 @@ There is plenty of retirement-ready employees to mentor the next generation in e
 * *NOTE* this does not include the current employees.
 * I hope the mentored employees stick around. 
  
+ *****
+ ### Resources:   
  
+ Data Sources: 
+ * departments.csv, dept_emp.csv, dept_manager.csv, employees.csv, salareis.csv, titles.csv  
+ 
+ Software:
+ * SQL
+ * PostgreSQL
+ * pgAdmin
